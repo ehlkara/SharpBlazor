@@ -3,12 +3,19 @@
 <h3>Product</h3>
 Name: @Product.Name<br />
 Active: @Product.IsActive<br />
+Price: @Product.Price<br />
+This Product is : @(Product.IsActive?"IsActive":"InActive")<br /><br />
+
+Active: <input type="checkbox" @bind-value="Product.IsActive" checked="@(Product.IsActive?"checked":null)"/><br />
+Price: <input type="number" @bind-value="@Product.Price" @bind-value:event="oninput"/>
+@*Price: <input type="number" @bind="@Product.Price" @bind:event="oninput"/>*@
 
 @code {
 	Sharp_Models.BlazorModels.Demo_Product Product = new()
 		{
 			Id = 1,
 			Name = "Ehlullah Karakurt",
-			IsActive = true
+			IsActive = true,
+			Price = 10.99
 		};
 }
