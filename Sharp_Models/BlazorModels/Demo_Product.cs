@@ -12,6 +12,6 @@ namespace Sharp_Models.BlazorModels
         public string Name { get; set; }
         public double Price { get; set; }
         public bool IsActive { get; set; }
-        public IEnumerable<Demo_ProductProp> ProductProperties { get; set; }
+        public List<Demo_ProductProp> ProductProperties { get; set; }
     }
 }
