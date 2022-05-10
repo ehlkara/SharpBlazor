@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWeb_Server", "SharpWeb_Server\SharpWeb_Server.csproj", "{12597153-58D9-400C-8D7F-789A37DC09FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpWeb_Client", "SharpWeb_Client\SharpWeb_Client.csproj", "{5BB60A00-9F5B-4549-9023-CFC6E44E27F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWeb_Client", "SharpWeb_Client\SharpWeb_Client.csproj", "{5BB60A00-9F5B-4549-9023-CFC6E44E27F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharp_Models", "Sharp_Models\Sharp_Models.csproj", "{4628A5E6-3D7A-4C13-90B3-7F4557A0181A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5BB60A00-9F5B-4549-9023-CFC6E44E27F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BB60A00-9F5B-4549-9023-CFC6E44E27F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BB60A00-9F5B-4549-9023-CFC6E44E27F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4628A5E6-3D7A-4C13-90B3-7F4557A0181A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4628A5E6-3D7A-4C13-90B3-7F4557A0181A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4628A5E6-3D7A-4C13-90B3-7F4557A0181A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4628A5E6-3D7A-4C13-90B3-7F4557A0181A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
