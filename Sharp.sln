@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWeb_Server", "SharpWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWeb_Client", "SharpWeb_Client\SharpWeb_Client.csproj", "{5BB60A00-9F5B-4549-9023-CFC6E44E27F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharp_Models", "Sharp_Models\Sharp_Models.csproj", "{4628A5E6-3D7A-4C13-90B3-7F4557A0181A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharp_Models", "Sharp_Models\Sharp_Models.csproj", "{4628A5E6-3D7A-4C13-90B3-7F4557A0181A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
