@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharp_Models.BlazorModels
+namespace Sharp_DataAccess
 {
-    public class Demo_ProductProp
+    public class Category
     {
         public int Id { get; set; }
-        public string Key { get; set; }
-        public string Value { get; set; }
+        public string Name { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

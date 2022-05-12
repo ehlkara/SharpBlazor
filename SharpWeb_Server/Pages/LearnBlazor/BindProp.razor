@@ -67,21 +67,21 @@
 
 	private string selectedProp = "";
 
-	Demo_Product Product = new()
+	Product Product = new()
 		{
 			Id = 1,
 			Name = "Ehlullah Karakurt",
 			IsActive = true,
 			Price = 10.99,
-			ProductProperties = new List<Demo_ProductProp>()
+			ProductProperties = new List<ProductProp>()
 			{
-				new Demo_ProductProp {Id=1,Key="Color",Value="Black"},
-				new Demo_ProductProp {Id=2,Key="Flavor",Value="Rose Jasmine"},
-				new Demo_ProductProp {Id=3,Key="Size",Value="20oz"}
+				new ProductProp {Id=1,Key="Color",Value="Black"},
+				new ProductProp {Id=2,Key="Flavor",Value="Rose Jasmine"},
+				new ProductProp {Id=3,Key="Size",Value="20oz"}
 			}
 		};
 
-	List<Demo_Product> Products = new();
+	List<Product> Products = new();
 
 	protected override void OnInitialized()
 	{
@@ -93,9 +93,9 @@
 				Price = 10.99,
 				ProductProperties = new()
 				{
-					new Demo_ProductProp { Id = 1, Key = "Flavor", Value = "Rose" },
-					new Demo_ProductProp { Id = 2, Key = "Size", Value = "20oz" },
-					new Demo_ProductProp { Id = 3, Key = "Color", Value = "Purple" }
+					new ProductProp { Id = 1, Key = "Flavor", Value = "Rose" },
+					new ProductProp { Id = 2, Key = "Size", Value = "20oz" },
+					new ProductProp { Id = 3, Key = "Color", Value = "Purple" }
 				}
 			});
 
@@ -107,9 +107,9 @@
 				Price = 10.99,
 				ProductProperties = new()
 				{
-					new Demo_ProductProp { Id = 1, Key = "Flavor", Value = "Lily" },
-					new Demo_ProductProp { Id = 2, Key = "Size", Value = "18oz" },
-					new Demo_ProductProp { Id = 3, Key = "Color", Value = "White" }
+					new ProductProp { Id = 1, Key = "Flavor", Value = "Lily" },
+					new ProductProp { Id = 2, Key = "Size", Value = "18oz" },
+					new ProductProp { Id = 3, Key = "Color", Value = "White" }
 				}
 			});
 	}
