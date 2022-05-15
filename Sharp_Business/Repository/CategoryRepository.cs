@@ -23,6 +23,7 @@ namespace Sharp_Business.Repository
             var mappedDto = _mapper.Map<Category>(objDTO);
             mappedDto.CreatedDate = DateTime.Now;
             var categoryResult = await _context.AddAsync(mappedDto);
+            await _context.SaveChangesAsync();
             _mapper.Map<CategoryDto>(categoryResult);
             return objDTO;
         }

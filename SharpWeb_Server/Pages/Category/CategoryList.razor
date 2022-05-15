@@ -1,4 +1,5 @@
 ﻿@page "/category"
+@inject ICategoryRepository _categoryRepository
 
 <div class="row mt-4">
 	<div class="col-6">
@@ -7,8 +8,39 @@
 	<div class="col-4 offset-2">
 		<a href="category/create" class="btn btn-primary form-control">Add New Category</a>
 	</div>
+	<div class="col-12">
+		@if (Categories.Any())
+		{
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach(var objCat in Categories)
+					{
+						<tr>
+							<td>
+								@objCat.Name
+							</td>
+							<td>
+								<NavLink href="" class="btn btn-primary">Edit</NavLink>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+	</div>
 </div>
 
 @code {
+	private IEnumerable<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
+	protected override async Task OnInitializedAsync()
+	{
+		Categories = await _categoryRepository.GetAll();
+	}
 }
