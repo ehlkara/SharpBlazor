@@ -33,14 +33,36 @@
 				</tbody>
 			</table>
 		}
+		else
+		{
+			if(IsLoading)
+			{
+				// loading gif
+				<div class="text-center">
+					<img src="/images/loading.gif"/>
+				</div>
+			}
+			else
+			{
+				// no records
+				<p>No records found.</p>
+			}
+		}
 	</div>
 </div>
 
 @code {
 	private IEnumerable<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
+	public bool IsLoading { get; set; } = true;
 
 	protected override async Task OnInitializedAsync()
 	{
+		await Task.Run(LoadCategories);
+	}
+
+	private async void LoadCategories()
+	{
 		Categories = await _categoryRepository.GetAll();
+		IsLoading = false;
 	}
 }
