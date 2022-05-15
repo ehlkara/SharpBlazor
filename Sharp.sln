@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWeb_Client", "SharpWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharp_Models", "Sharp_Models\Sharp_Models.csproj", "{4628A5E6-3D7A-4C13-90B3-7F4557A0181A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharp_Business", "Sharp_Business\Sharp_Business.csproj", "{83BBE779-6ABD-4351-8EE3-53C5CE9A7A5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharp_Business", "Sharp_Business\Sharp_Business.csproj", "{83BBE779-6ABD-4351-8EE3-53C5CE9A7A5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharp_Common", "Sharp_Common\Sharp_Common.csproj", "{BA391A17-FF8C-4ACC-94A1-120BDA8DACAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharp_Common", "Sharp_Common\Sharp_Common.csproj", "{BA391A17-FF8C-4ACC-94A1-120BDA8DACAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharp_DataAccess", "Sharp_DataAccess\Sharp_DataAccess.csproj", "{32AE674B-5397-4FB9-B87A-0EA188851937}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharp_DataAccess", "Sharp_DataAccess\Sharp_DataAccess.csproj", "{32AE674B-5397-4FB9-B87A-0EA188851937}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
