@@ -39,7 +39,7 @@ namespace Sharp_Business.Repository
 
 		public async Task<ProductDto> Get(int id)
 		{
-			var obj = await _context.Products.FirstOrDefaultAsync(c => c.Id == id);
+			var obj = await _context.Products.Include(u=>u.Category).FirstOrDefaultAsync(c => c.Id == id);
 			if (obj == null)
 			{
 				throw new NotImplementedException();
@@ -49,7 +49,7 @@ namespace Sharp_Business.Repository
 
 		public async Task<IEnumerable<ProductDto>> GetAll()
 		{
-			return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(_context.Products);
+			return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(_context.Products.Include(u => u.Category));
 		}
 
 		public async Task<ProductDto> Update(ProductDto objDTO)
