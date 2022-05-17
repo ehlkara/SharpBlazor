@@ -48,7 +48,7 @@ namespace Sharp_Business.Repository
             var obj = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
             if (obj == null)
             {
-                return null;
+                throw new NotImplementedException();
             }
             return _mapper.Map<CategoryDto>(obj);
         }

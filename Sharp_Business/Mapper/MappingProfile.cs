@@ -14,6 +14,7 @@ namespace Sharp_Business.Mapper
         public MappingProfile()
         {
             CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Product, ProductDto>().ReverseMap();
         }
     }
 }
