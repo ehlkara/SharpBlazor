@@ -5,6 +5,8 @@ using Sharp_Business.Repository;
 using Sharp_Business.Repository.IRepository;
 using Sharp_DataAccess.Data;
 using SharpWeb_Server.Data;
+using SharpWeb_Server.Service;
+using SharpWeb_Server.Service.IService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IFileUpload, FileUpload>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
