@@ -46,11 +46,11 @@ namespace Sharp_Business.Repository
         public async Task<CategoryDto> Get(int id)
         {
             var obj = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
-            if (obj != null)
+            if (obj == null)
             {
-                _mapper.Map<Category, CategoryDto>(obj);
+                return null;
             }
-            return new CategoryDto();
+            return _mapper.Map<CategoryDto>(obj);
         }
 
         public async Task<CategoryDto> Update(CategoryDto objDTO)
