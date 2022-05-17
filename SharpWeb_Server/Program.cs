@@ -7,12 +7,16 @@ using Sharp_DataAccess.Data;
 using SharpWeb_Server.Data;
 using SharpWeb_Server.Service;
 using SharpWeb_Server.Service.IService;
+using Syncfusion.Blazor;
+
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjQwMDY0QDMyMzAyZTMxMmUzMFpBTGJzcXAzenRXaklqMmllR1NHd0JKcUczL0VjYnA2eFR6bVVXSHdicFk9");
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddSyncfusionBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
