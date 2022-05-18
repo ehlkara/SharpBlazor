@@ -22,5 +22,6 @@ namespace Sharp_Models
         [Range(1, int.MaxValue, ErrorMessage = "Please select a category")]
         public int CategoryId { get; set; }
         public CategoryDto Category { get; set; }
+        public ICollection<ProductPriceDto> ProductPrices { get; set; }
     }
 }

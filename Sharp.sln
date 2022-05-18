@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharp_Common", "Sharp_Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharp_DataAccess", "Sharp_DataAccess\Sharp_DataAccess.csproj", "{32AE674B-5397-4FB9-B87A-0EA188851937}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpWeb_API", "SharpWeb_API\SharpWeb_API.csproj", "{AC5A0F4F-346C-46ED-BDBA-56422F60B31A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{32AE674B-5397-4FB9-B87A-0EA188851937}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32AE674B-5397-4FB9-B87A-0EA188851937}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32AE674B-5397-4FB9-B87A-0EA188851937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC5A0F4F-346C-46ED-BDBA-56422F60B31A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5A0F4F-346C-46ED-BDBA-56422F60B31A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5A0F4F-346C-46ED-BDBA-56422F60B31A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5A0F4F-346C-46ED-BDBA-56422F60B31A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
