@@ -13,6 +13,6 @@ namespace Sharp_Business.Repository.IRepository
         public Task<ProductPriceDto> Update(ProductPriceDto objDTO);
         public Task<int> Delete(int id);
         public Task<ProductPriceDto> Get(int id);
-        public Task<IEnumerable<ProductPriceDto>> GetAll();
+        public Task<IEnumerable<ProductPriceDto>> GetAll(int? id = null);
     }
 }

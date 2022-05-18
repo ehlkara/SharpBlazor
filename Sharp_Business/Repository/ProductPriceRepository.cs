@@ -52,9 +52,17 @@ namespace Sharp_Business.Repository
             return _mapper.Map<ProductPriceDto>(obj);
         }
 
-        public async Task<IEnumerable<ProductPriceDto>> GetAll()
+        public async Task<IEnumerable<ProductPriceDto>> GetAll(int? id = null)
         {
-            return _mapper.Map<IEnumerable<ProductPrice>, IEnumerable<ProductPriceDto>>(_context.ProductPrices.Include(u => u.Product));
+            if(id != null && id > 0)
+            {
+                return _mapper.Map<IEnumerable<ProductPrice>, IEnumerable<ProductPriceDto>>
+                    (_context.ProductPrices.Where(p => p.ProductId==id));
+            }
+            else
+            {
+                return _mapper.Map<IEnumerable<ProductPrice>, IEnumerable<ProductPriceDto>>(_context.ProductPrices);
+            }
         }
 
         public async Task<ProductPriceDto> Update(ProductPriceDto objDTO)
