@@ -6,10 +6,9 @@ namespace SharpWeb_Client.Service
 {
     public class ProductService : IProductService
     {
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
         private IConfiguration _configuration;
         private string BaseServerUrl;
-
         public ProductService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
@@ -19,12 +18,12 @@ namespace SharpWeb_Client.Service
 
         public async Task<ProductDto> Get(int productId)
         {
-            var response = await _httpClient.GetAsync($"/api/product/{productId}");
+            var response = await _httpClient.GetAsync($"/api/products/{productId}");
             var content = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
                 var product = JsonConvert.DeserializeObject<ProductDto>(content);
-                product.ImageUrl += BaseServerUrl + product.ImageUrl;
+                product.ImageUrl = BaseServerUrl + product.ImageUrl;
                 return product;
             }
             else
@@ -36,7 +35,7 @@ namespace SharpWeb_Client.Service
 
         public async Task<IEnumerable<ProductDto>> GetAll()
         {
-            var response = await _httpClient.GetAsync("/api/product");
+            var response = await _httpClient.GetAsync("/api/products");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -47,6 +46,7 @@ namespace SharpWeb_Client.Service
                 }
                 return products;
             }
+
             return new List<ProductDto>();
         }
     }
