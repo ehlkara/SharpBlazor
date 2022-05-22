@@ -1,17 +1,20 @@
 ﻿using Newtonsoft.Json;
 using Sharp_Models;
 using SharpWeb_Client.Service.IService;
-using SharpWeb_Server.Pages;
 
 namespace SharpWeb_Client.Service
 {
     public class ProductService : IProductService
     {
         private HttpClient _httpClient;
+        private IConfiguration _configuration;
+        private string BaseServerUrl;
 
-        public ProductService(HttpClient httpClient)
+        public ProductService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
+            _configuration = configuration;
+            BaseServerUrl = _configuration.GetSection("BaseServerUrl").Value;
         }
 
         public async Task<ProductDto> Get(int productId)
@@ -21,6 +24,7 @@ namespace SharpWeb_Client.Service
             if (response.IsSuccessStatusCode)
             {
                 var product = JsonConvert.DeserializeObject<ProductDto>(content);
+                product.ImageUrl += BaseServerUrl + product.ImageUrl;
                 return product;
             }
             else
@@ -37,6 +41,10 @@ namespace SharpWeb_Client.Service
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var products = JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(content);
+                foreach (var prod in products)
+                {
+                    prod.ImageUrl = BaseServerUrl + prod.ImageUrl;
+                }
                 return products;
             }
             return new List<ProductDto>();
