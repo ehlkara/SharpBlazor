@@ -49,5 +49,9 @@ namespace Sharp_Models
         [Required]
         [Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
     }
 }
