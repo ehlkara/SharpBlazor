@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharp_DataAccess", "Sharp_D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWeb_API", "SharpWeb_API\SharpWeb_API.csproj", "{AC5A0F4F-346C-46ED-BDBA-56422F60B31A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpWeb_Client", "SharpWeb_Client\SharpWeb_Client.csproj", "{F21DD2FB-927D-43F9-9CB3-A92DA733FA1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWeb_Client", "SharpWeb_Client\SharpWeb_Client.csproj", "{F21DD2FB-927D-43F9-9CB3-A92DA733FA1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
