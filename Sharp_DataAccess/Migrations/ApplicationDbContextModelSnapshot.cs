@@ -56,9 +56,6 @@ namespace Sharp_DataAccess.Migrations
                     b.Property<int>("OrderHeaderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -74,8 +71,6 @@ namespace Sharp_DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -205,31 +200,6 @@ namespace Sharp_DataAccess.Migrations
                     b.ToTable("ProductPrices");
                 });
 
-            modelBuilder.Entity("Sharp_DataAccess.ViewModel.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("OrderHeaderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderHeaderId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("Sharp_DataAccess.OrderDetail", b =>
-                {
-                    b.HasOne("Sharp_DataAccess.ViewModel.Order", null)
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId");
-                });
-
             modelBuilder.Entity("Sharp_DataAccess.Product", b =>
                 {
                     b.HasOne("Sharp_DataAccess.Category", "Category")
@@ -252,25 +222,9 @@ namespace Sharp_DataAccess.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Sharp_DataAccess.ViewModel.Order", b =>
-                {
-                    b.HasOne("Sharp_DataAccess.OrderHeader", "OrderHeader")
-                        .WithMany()
-                        .HasForeignKey("OrderHeaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("OrderHeader");
-                });
-
             modelBuilder.Entity("Sharp_DataAccess.Product", b =>
                 {
                     b.Navigation("ProductPrices");
-                });
-
-            modelBuilder.Entity("Sharp_DataAccess.ViewModel.Order", b =>
-                {
-                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }

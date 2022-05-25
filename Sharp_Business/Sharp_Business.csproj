@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sharp_Common\Sharp_Common.csproj" />
     <ProjectReference Include="..\Sharp_DataAccess\Sharp_DataAccess.csproj" />
     <ProjectReference Include="..\Sharp_Models\Sharp_Models.csproj" />
   </ItemGroup>
