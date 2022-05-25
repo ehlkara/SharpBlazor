@@ -8,6 +8,7 @@ namespace SharpWeb_Client.Service
     public class CartService : ICartService
     {
         private readonly ILocalStorageService _localStorage;
+        public event Action OnChange;
 
         public CartService(ILocalStorageService localStorage)
         {
@@ -19,11 +20,11 @@ namespace SharpWeb_Client.Service
             var cart = await _localStorage.GetItemAsync<List<ShoppingCart>>(SD.ShoppingCart);
 
             //if count is 0 or 1 then we remove the item
-            for(int i = 0; i < cart.Count; i++)
+            for (int i = 0; i < cart.Count; i++)
             {
                 if (cart[i].ProductId == cartToDecrement.ProductId && cart[i].ProductPriceId == cartToDecrement.ProductPriceId)
                 {
-                    if (cart[i].Count==1 || cart[i].Count == 0)
+                    if (cart[i].Count == 1 || cartToDecrement.Count == 0)
                     {
                         cart.Remove(cart[i]);
                     }
@@ -33,26 +34,26 @@ namespace SharpWeb_Client.Service
                     }
                 }
             }
+
             await _localStorage.SetItemAsync(SD.ShoppingCart, cart);
+            OnChange.Invoke();
         }
 
         public async Task IncrementCart(ShoppingCart cartToAdd)
         {
             var cart = await _localStorage.GetItemAsync<List<ShoppingCart>>(SD.ShoppingCart);
-
             bool itemInCart = false;
 
-            if(cart == null)
+            if (cart == null)
             {
                 cart = new List<ShoppingCart>();
             }
-
             foreach (var obj in cart)
             {
-                if(obj.ProductId == cartToAdd.ProductId && obj.ProductPriceId == cartToAdd.ProductPriceId)
+                if (obj.ProductId == cartToAdd.ProductId && obj.ProductPriceId == cartToAdd.ProductPriceId)
                 {
                     itemInCart = true;
-                    obj.Count = cartToAdd.Count;
+                    obj.Count += cartToAdd.Count;
                 }
             }
             if (!itemInCart)
@@ -65,6 +66,7 @@ namespace SharpWeb_Client.Service
                 });
             }
             await _localStorage.SetItemAsync(SD.ShoppingCart, cart);
+            OnChange.Invoke();
         }
     }
 }
