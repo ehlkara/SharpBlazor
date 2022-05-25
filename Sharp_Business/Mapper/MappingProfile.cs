@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Sharp_DataAccess;
+using Sharp_DataAccess.ViewModel;
 using Sharp_Models;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace Sharp_Business.Mapper
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Product, ProductDto>().ReverseMap();
             CreateMap<ProductPrice, ProductPriceDto>().ReverseMap();
+            CreateMap<OrderHeader, OrderHeaderDto>().ReverseMap();
+            CreateMap<OrderDetail, OrderDetailDto>().ReverseMap();
+            CreateMap<Order, OrderDto>().ReverseMap();
         }
     }
 }
