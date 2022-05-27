@@ -43,14 +43,29 @@ namespace SharpWeb_Client.Service
             }
         }
 
-        public Task Logout()
+        public async Task Logout()
         {
-            throw new NotImplementedException();
+            await _localStorage.RemoveItemAsync(SD.Local_Token);
+            await _localStorage.RemoveItemAsync(SD.Local_UserDetails);
+            _client.DefaultRequestHeaders.Authorization = null;
         }
 
-        public Task<SignUpResponseDto> RegisterUser(SignUpRequestDto signUpRequest)
+        public async Task<SignUpResponseDto> RegisterUser(SignUpRequestDto signUpRequest)
         {
-            throw new NotImplementedException();
+            var content = JsonConvert.SerializeObject(signUpRequest);
+            var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync("api/account/signup", bodyContent);
+            var contentTemp = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<SignUpResponseDto>(contentTemp);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return new SignUpResponseDto() { IsRegisterationSuccessful = true };
+            }
+            else
+            {
+                return new SignUpResponseDto() { IsRegisterationSuccessful = false };
+            }
         }
     }
 }
