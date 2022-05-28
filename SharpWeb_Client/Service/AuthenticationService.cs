@@ -64,7 +64,7 @@ namespace SharpWeb_Client.Service
             }
             else
             {
-                return new SignUpResponseDto() { IsRegisterationSuccessful = false };
+                return new SignUpResponseDto() { IsRegisterationSuccessful = false, Errors = result.Errors };
             }
         }
     }
