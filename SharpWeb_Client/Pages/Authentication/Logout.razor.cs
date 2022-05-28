@@ -13,7 +13,7 @@ namespace SharpWeb_Client.Pages.Authentication
         protected override async Task OnInitializedAsync()
         {
             await _autService.Logout();
-            _navigationManager.NavigateTo("/", forceLoad: true);
+            _navigationManager.NavigateTo("/");
         }
     }
 }
