@@ -2,6 +2,7 @@
 @inject ILocalStorageService _localStorage
 @inject IProductService _productService
 @inject IJSRuntime _jsRuntime
+@attribute [Authorize]
 
 @if (IsProcessing)
 {
@@ -141,6 +142,15 @@ else
 				};
 			Order.OrderDetails.Add(orderDetailDto);
 			Order.OrderHeader.OrderTotal += (cart.Count * productPrice.Price);
+		}
+
+		if(await _localStorage.GetItemAsync<UserDto>(SD.Local_UserDetails) != null)
+		{
+			var userInfo = await _localStorage.GetItemAsync<UserDto>(SD.Local_UserDetails);
+			Order.OrderHeader.UserId = userInfo.Id;
+			Order.OrderHeader.Name = userInfo.Name;
+			Order.OrderHeader.Email = userInfo.Email;
+			Order.OrderHeader.PhoneNumber = userInfo.PhoneNumber;
 		}
 
 		IsProcessing = false;

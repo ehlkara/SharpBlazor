@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Sharp_Models;
 using SharpWeb_Client.Service.IService;
+using System.Web;
 
 namespace SharpWeb_Client.Pages.Authentication
 {
@@ -16,7 +17,9 @@ namespace SharpWeb_Client.Pages.Authentication
         [Inject]
         public NavigationManager _navigationManager { get; set; }
 
-        private async Task LoginUser()
+		public string ReturnUrl { get; set; }
+
+		private async Task LoginUser()
         {
             ShowSignInErrors = false;
             IsProcessing = true;
@@ -24,7 +27,17 @@ namespace SharpWeb_Client.Pages.Authentication
             if (result.IsAuthSuccessful)
             {
                 //registration is successful
-                _navigationManager.NavigateTo("/");
+                var absoluteUri = new Uri(_navigationManager.Uri);
+                var queryParam = HttpUtility.ParseQueryString(absoluteUri.Query);
+                ReturnUrl = queryParam["returnUrl"];
+				if (string.IsNullOrEmpty(ReturnUrl))
+				{
+                    _navigationManager.NavigateTo("/");
+                }
+				else
+				{
+                    _navigationManager.NavigateTo("/" + ReturnUrl);
+				}
             }
             else
             {
