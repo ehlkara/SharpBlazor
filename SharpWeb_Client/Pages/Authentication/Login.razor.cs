@@ -24,7 +24,7 @@ namespace SharpWeb_Client.Pages.Authentication
             if (result.IsAuthSuccessful)
             {
                 //registration is successful
-                _navigationManager.NavigateTo("/");
+                _navigationManager.NavigateTo("/", forceLoad: true);
             }
             else
             {
