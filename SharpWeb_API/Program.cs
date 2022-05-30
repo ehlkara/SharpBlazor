@@ -8,6 +8,7 @@ using Sharp_Business.Repository.IRepository;
 using Sharp_DataAccess;
 using Sharp_DataAccess.Data;
 using SharpWeb_API.Helper;
+using Stripe;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,6 +82,8 @@ builder.Services.AddCors(o => o.AddPolicy("Sharp", builder =>
 }));
 
 var app = builder.Build();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["ApiKey"];
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
