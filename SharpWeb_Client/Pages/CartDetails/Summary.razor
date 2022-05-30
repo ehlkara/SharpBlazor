@@ -1,6 +1,7 @@
 ﻿@page "/summary"
 @inject ILocalStorageService _localStorage
 @inject IProductService _productService
+@inject IOrderService _orderService
 @inject IJSRuntime _jsRuntime
 @attribute [Authorize]
 
@@ -56,7 +57,7 @@ else
 			</div>
 
 			<div class="col-12 col-lg-5 p-4 ml-4 ml-md-0 mt-4 mt-md-0 border">
-				<EditForm Model="Order.OrderHeader" OnInvalidSubmit="HandleCheckout">
+				<EditForm Model="Order.OrderHeader" OnValidSubmit="HandleCheckout">
 					<DataAnnotationsValidator />
 					<div class="row px-2 text-success border-bottom"><div class="col-7 py-1"><p style="font-size:x-large;margin:0px;">Enter Details</p></div></div>
 
@@ -121,7 +122,7 @@ else
 				OrderHeader = new()
 				{
 					OrderTotal = 0,
-					State = SD.Status_Pending
+					Status = SD.Status_Pending
 				},
 				OrderDetails = new List<OrderDetailDto>()
 			};
@@ -158,6 +159,18 @@ else
 
 	private async Task HandleCheckout()
 	{
+		try
+		{
+			var paymentDto = new StripePaymentDto() {
+				Order = Order
+			};
 
+			var orderHeaderSaved = await _orderService.Create(paymentDto);
+		}
+		catch (Exception ex)
+		{
+
+			await _jsRuntime.ToastrError(ex.Message);
+		}
 	}
 }

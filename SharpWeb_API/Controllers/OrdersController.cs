@@ -45,5 +45,14 @@ namespace SharpWeb_API.Controllers
             }
             return Ok(orderHeader);
         }
+
+        [HttpPost]
+        [ActionName("Create")]
+        public async Task<IActionResult> Create([FromBody] StripePaymentDto paymentDto)
+        {
+            paymentDto.Order.OrderHeader.OrderDate = DateTime.Now;
+            var result = await _orderRepository.Create(paymentDto.Order);
+            return Ok(result);
+        }
     }
 }

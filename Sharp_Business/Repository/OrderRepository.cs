@@ -38,14 +38,15 @@ namespace Sharp_Business.Repository
                 return new OrderDto()
                 {
                     OrderHeader = _mapper.Map<OrderHeader, OrderHeaderDto>(obj.OrderHeader),
-                    OrderDetails = _mapper.Map<IEnumerable<OrderDetail>, IEnumerable<OrderDetailDto>>(obj.OrderDetails).ToList(),
+                    OrderDetails = _mapper.Map<IEnumerable<OrderDetail>, IEnumerable<OrderDetailDto>>(obj.OrderDetails).ToList()
                 };
+
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
+
             return objDto;
         }
 

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Sharp_Models;
 using SharpWeb_Client.Service.IService;
+using System.Text;
 
 namespace SharpWeb_Client.Service
 {
@@ -14,6 +15,20 @@ namespace SharpWeb_Client.Service
             _httpClient = httpClient;
             _configuration = configuration;
             BaseServerUrl = _configuration.GetSection("BaseServerUrl").Value;
+        }
+
+        public async Task<OrderDto> Create(StripePaymentDto paymentDto)
+        {
+            var content = JsonConvert.SerializeObject(paymentDto);
+            var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("api/orders/create", bodyContent);
+            string responseResult = response.Content.ReadAsStringAsync().Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = JsonConvert.DeserializeObject<OrderDto>(responseResult);
+                return result;
+            }
+            return new OrderDto();
         }
 
         public async Task<OrderDto> Get(int orderHeaderId)
