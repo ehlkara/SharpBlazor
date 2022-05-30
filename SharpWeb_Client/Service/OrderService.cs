@@ -60,5 +60,20 @@ namespace SharpWeb_Client.Service
 
             return new List<OrderDto>();
         }
+
+        public async Task<OrderHeaderDto> MarkPaymentSuccessful(OrderHeaderDto orderHeader)
+        {
+            var content = JsonConvert.SerializeObject(orderHeader);
+            var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("api/orders/paymentsuccessful", bodyContent);
+            string responseResult = response.Content.ReadAsStringAsync().Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = JsonConvert.DeserializeObject<OrderHeaderDto>(responseResult);
+                return result;
+            }
+            var errorModel = JsonConvert.DeserializeObject<ErrorModelDto>(responseResult);
+            throw new Exception(errorModel.ErrorMessage);
+        }
     }
 }

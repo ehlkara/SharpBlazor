@@ -7,5 +7,6 @@ namespace SharpWeb_Client.Service.IService
         Task<OrderDto> Get(int orderId);
         Task<IEnumerable<OrderDto>> GetAll(string? userId);
         Task<OrderDto> Create(StripePaymentDto paymentDto);
+        Task<OrderHeaderDto> MarkPaymentSuccessful(OrderHeaderDto orderHeader);
     }
 }

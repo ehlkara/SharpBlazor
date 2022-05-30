@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Sharp_Business.Repository.IRepository;
 using Sharp_Models;
+using Stripe.Checkout;
 
 namespace SharpWeb_API.Controllers
 {
@@ -53,6 +54,23 @@ namespace SharpWeb_API.Controllers
             paymentDto.Order.OrderHeader.OrderDate = DateTime.Now;
             var result = await _orderRepository.Create(paymentDto.Order);
             return Ok(result);
+        }
+        [HttpPost]
+        [ActionName("paymentsuccessful")]
+        public async Task<IActionResult> PaymentSuccessful([FromBody] OrderHeaderDto orderHeaderDto)
+        {
+            var service = new SessionService();
+            var sessionDetails = service.Get(orderHeaderDto.SessionId);
+            if(sessionDetails.PaymentStatus == "paid")
+            {
+                var result = await _orderRepository.MarkPaymentSuccessful(orderHeaderDto.Id);
+                if (result == null)
+                {
+                    return BadRequest(new ErrorModelDto() { ErrorMessage = "Can not mark payment as successful" });
+                }
+                return Ok(result);
+            }
+            return BadRequest();
         }
     }
 }
