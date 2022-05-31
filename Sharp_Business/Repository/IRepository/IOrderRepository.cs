@@ -17,5 +17,6 @@ namespace Sharp_Business.Repository.IRepository
         Task<OrderHeaderDto> UpdateHeader(OrderHeaderDto objDto);
         Task<OrderHeaderDto> MarkPaymentSuccessful(int id);
         Task<bool> UpdateOrderStatus(int orderId, string status);
+        Task<OrderHeaderDto> CancelOrder(int id);
     }
 }

@@ -9,6 +9,7 @@ using SharpWeb_Server.Service;
 using SharpWeb_Server.Service.IService;
 using Syncfusion.Blazor;
 using Microsoft.AspNetCore.Identity;
+using Stripe;
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjQwMDY0QDMyMzAyZTMxMmUzMFpBTGJzcXAzenRXaklqMmllR1NHd0JKcUczL0VjYnA2eFR6bVVXSHdicFk9");
 
@@ -30,6 +31,8 @@ builder.Services.AddScoped<IFileUpload, FileUpload>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["ApiKey"];
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

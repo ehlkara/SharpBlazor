@@ -55,7 +55,7 @@ namespace SharpWeb_API.Controllers
                 Session session = service.Create(options);
                 return Ok(new SuccessModelDto()
                 {
-                    Data = session.Id
+                    Data = session.Id + ";" + session.PaymentIntentId
                 });
             }
             catch (Exception ex)

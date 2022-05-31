@@ -20,6 +20,38 @@ namespace Sharp_Business.Repository
             _mapper = mapper;
         }
 
+        public async Task<OrderHeaderDto> CancelOrder(int id)
+        {
+            var orderHeader = await _context.OrderHeaders.FindAsync(id);
+            if(orderHeader == null)
+            {
+                return new OrderHeaderDto();
+            }
+
+            if(orderHeader.Status == SD.Status_Pending)
+            {
+                orderHeader.Status = SD.Status_Cancelled;
+                await _context.SaveChangesAsync();
+            }
+            if(orderHeader.Status == SD.Status_Confirmed)
+            {
+                //refund
+                var options = new Stripe.RefundCreateOptions
+                {
+                    Reason = Stripe.RefundReasons.RequestedByCustomer,
+                    PaymentIntent = orderHeader.PaymentIntentId
+                };
+
+                var service = new Stripe.RefundService();
+                Stripe.Refund refund = service.Create(options);
+
+                orderHeader.Status = SD.Status_Refunded;
+                await _context.SaveChangesAsync();
+            }
+
+            return _mapper.Map<OrderHeader, OrderHeaderDto>(orderHeader);
+        }
+
         public async Task<OrderDto> Create(OrderDto objDto)
         {
             try
@@ -118,10 +150,19 @@ namespace Sharp_Business.Repository
         {
             if (objDto != null)
             {
-                var orderHeader = _mapper.Map<OrderHeaderDto, OrderHeader>(objDto);
-                _context.OrderHeaders.Update(orderHeader);
+                var orderHeaderFromDb = _context.OrderHeaders.FirstOrDefault(o => o.Id == objDto.Id);
+                orderHeaderFromDb.Name = objDto.Name;
+                orderHeaderFromDb.PhoneNumber = objDto.PhoneNumber;
+                orderHeaderFromDb.Carrier = objDto.Carrier;
+                orderHeaderFromDb.Tracking = objDto.Tracking;
+                orderHeaderFromDb.StreetAddress = objDto.StreetAddress;
+                orderHeaderFromDb.City = objDto.City;
+                orderHeaderFromDb.State = objDto.State;
+                orderHeaderFromDb.PostalCode = objDto.PostalCode;
+                orderHeaderFromDb.Status = objDto.Status;
+
                 await _context.SaveChangesAsync();
-                return _mapper.Map<OrderHeader, OrderHeaderDto>(orderHeader);
+                return _mapper.Map<OrderHeader, OrderHeaderDto>(orderHeaderFromDb);
             }
             return new OrderHeaderDto();
         }
