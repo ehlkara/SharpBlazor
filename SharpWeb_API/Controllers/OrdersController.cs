@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Sharp_Business.Repository.IRepository;
 using Sharp_Models;
@@ -11,10 +12,12 @@ namespace SharpWeb_API.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IEmailSender _emailSender;
 
-        public OrdersController(IOrderRepository orderRepository)
+        public OrdersController(IOrderRepository orderRepository, IEmailSender emailSender)
         {
             _orderRepository = orderRepository;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -64,6 +67,8 @@ namespace SharpWeb_API.Controllers
             if(sessionDetails.PaymentStatus == "paid")
             {
                 var result = await _orderRepository.MarkPaymentSuccessful(orderHeaderDto.Id);
+                await _emailSender.SendEmailAsync(orderHeaderDto.Email, "Sharp Order Confirmation",
+                    "New Order has been created :" + orderHeaderDto.Id);
                 if (result == null)
                 {
                     return BadRequest(new ErrorModelDto() { ErrorMessage = "Can not mark payment as successful" });
